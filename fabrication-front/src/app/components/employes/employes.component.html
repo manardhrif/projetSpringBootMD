@@ -1,0 +1,36 @@
+<h2>Gestion des Employés</h2>
+
+<form [formGroup]="form" (ngSubmit)="onSubmit()">
+  <input formControlName="nom" placeholder="Nom" />
+  <input formControlName="poste" placeholder="Poste" />
+
+  <select formControlName="machineAssignee">
+    <option [ngValue]="null">Aucune machine</option>
+    <option *ngFor="let m of machines" [value]="m.id">{{ m.nom }}</option>
+  </select>
+
+  <button type="submit">{{ editingEmployeId ? 'Modifier' : 'Ajouter' }}</button>
+  <button type="button" *ngIf="editingEmployeId" (click)="cancelEdit()">Annuler</button>
+</form>
+
+<table>
+  <thead>
+    <tr>
+      <th>Nom</th>
+      <th>Poste</th>
+      <th>Machine</th>
+      <th>Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let e of employes">
+      <td>{{ e.nom }}</td>
+      <td>{{ e.poste }}</td>
+      <td>{{ e.Machine_Assignee?.nom || 'Aucune' }}</td>
+      <td>
+        <button (click)="editEmploye(e)">Modifier</button>
+        <button *ngIf="e.id !== undefined" (click)="deleteEmploye(e.id)">Supprimer</button>
+      </td>
+    </tr>
+  </tbody>
+</table>

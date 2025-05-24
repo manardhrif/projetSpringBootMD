@@ -1,0 +1,71 @@
+/* ordres.component.css */
+
+h2 {
+  margin-bottom: 20px;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  color: #222;
+}
+
+.container-actions {
+  margin-bottom: 15px;
+}
+
+button {
+  background-color: #4CAF50; /* vert */
+  border: none;
+  color: white;
+  padding: 8px 16px;
+  margin-right: 10px;
+  border-radius: 4px;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+button:hover {
+  background-color: #45a049;
+}
+
+button.delete {
+  background-color: #f44336; /* rouge */
+}
+
+button.delete:hover {
+  background-color: #d32f2f;
+}
+
+button.edit {
+  background-color: #2196F3; /* bleu */
+}
+
+button.edit:hover {
+  background-color: #1976d2;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+}
+
+th, td {
+  border: 1px solid #ddd;
+  padding: 12px 15px;
+  text-align: center;
+  font-size: 1rem;
+}
+
+th {
+  background-color: #4CAF50;
+  color: white;
+  text-transform: uppercase;
+}
+
+tr:nth-child(even) {
+  background-color: #f9f9f9;
+}
+
+tr:hover {
+  background-color: #e6f2e6;
+}

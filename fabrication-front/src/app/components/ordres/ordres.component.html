@@ -1,0 +1,79 @@
+<h2>Gestion des Ordres de Fabrication</h2>
+
+<!-- Tableau des ordres -->
+<table border="1" style="margin-top:20px; width: 100%;">
+  <thead>
+    <tr>
+      <th>ID</th>
+      <th>Projet</th>
+      <th>Quantité</th>
+      <th>Date</th>
+      <th>État</th>
+      <th>Employé</th>
+      <th>Machine</th>
+      <th>Produit</th>
+      <th>Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let ordre of ordres">
+      <td>{{ ordre.id }}</td>
+      <td>{{ ordre.projet }}</td>
+      <td>{{ ordre.quantite }}</td>
+      <td>{{ ordre.date }}</td>
+      <td>{{ ordre.etat }}</td>
+      <td>{{ ordre.employe?.nom || 'N/A' }}</td>
+      <td>{{ ordre.machine?.nom || 'N/A' }}</td>
+      <td>{{ ordre.produit?.nom || 'N/A' }}</td>
+      <td>
+        <button (click)="modifierOrdre(ordre)">Modifier</button>
+        <button (click)="supprimerOrdre(ordre.id!)">Supprimer</button>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+<!-- Formulaire d'ajout / modification -->
+<h3 style="margin-top: 30px;">
+  {{ modifierMode ? 'Modifier un Ordre' : 'Ajouter un nouvel Ordre' }}
+</h3>
+
+<form (ngSubmit)="modifierMode ? enregistrerModification() : ajouterOrdre()" style="margin-top: 10px;">
+  <label>Projet:</label><br>
+  <input type="text" [(ngModel)]="nouveauOrdre.projet" name="projet" required><br><br>
+
+  <label>Quantité:</label><br>
+  <input type="number" [(ngModel)]="nouveauOrdre.quantite" name="quantite" required><br><br>
+
+  <label>Date:</label><br>
+  <input type="date" [(ngModel)]="nouveauOrdre.date" name="date" required><br><br>
+
+  <label>État:</label><br>
+  <select [(ngModel)]="nouveauOrdre.etat" name="etat" required>
+    <option value="PLANIFIÉ">Planifié</option>
+    <option value="EN_COURS">En cours</option>
+    <option value="TERMINÉ">Terminé</option>
+  </select><br><br>
+
+  <label>Employé:</label><br>
+  <select [(ngModel)]="nouveauOrdre.employe" name="employe" required>
+    <option *ngFor="let e of employes" [ngValue]="e">{{ e.nom }}</option>
+  </select><br><br>
+
+  <label>Machine:</label><br>
+  <select [(ngModel)]="nouveauOrdre.machine" name="machine" required>
+    <option *ngFor="let m of machines" [ngValue]="m">{{ m.nom }}</option>
+  </select><br><br>
+
+  <label>Produit:</label><br>
+  <select [(ngModel)]="nouveauOrdre.produit" name="produit" required>
+    <option *ngFor="let p of produits" [ngValue]="p">{{ p.nom }}</option>
+  </select><br><br>
+
+  <button type="submit" style="margin-right: 10px;">
+    {{ modifierMode ? 'Enregistrer' : 'Ajouter' }}
+  </button>
+  <button type="button" *ngIf="modifierMode" (click)="annulerModification()">
+    Annuler
+  </button>
+</form>

@@ -1,0 +1,32 @@
+<h2>Liste des Machines</h2>
+<table>
+  <thead>
+    <tr>
+      <th>Nom</th>
+      <th>État</th>
+      <th>Dernière maintenance</th>
+      <th>Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let m of machines">
+      <td>{{ m.nom }}</td>
+      <td>{{ m.etat }}</td>
+      <td>{{ m.derniere_maintenance }}</td>
+      <td>
+        <button (click)="modifierMachine(m)">Modifier</button>
+        <button (click)="supprimerMachine(m.id)">Supprimer</button>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+<h3 *ngIf="!modifierMode">Ajouter une machine</h3>
+<h3 *ngIf="modifierMode">Modifier la machine</h3>
+
+<form (ngSubmit)="modifierMode ? enregistrerModification() : ajouterMachine()">
+  <input [(ngModel)]="nouvelleMachine.nom" name="nom" placeholder="Nom" required />
+  <input [(ngModel)]="nouvelleMachine.etat" name="etat" placeholder="État" required />
+  <input [(ngModel)]="nouvelleMachine.derniere_maintenance" name="derniere_maintenance" type="date" required />
+  <button type="submit">{{ modifierMode ? 'Enregistrer' : 'Ajouter' }}</button>
+</form>

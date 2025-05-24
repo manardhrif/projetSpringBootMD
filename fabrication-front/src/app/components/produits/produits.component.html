@@ -1,0 +1,51 @@
+<h2>Gestion des Produits</h2>
+
+<!-- Formulaire d'ajout / modification -->
+<form (ngSubmit)="modifierMode ? enregistrerModification() : ajouterProduit()">
+  <label>Nom:</label>
+  <input type="text" [(ngModel)]="nouveauProduit.nom" name="nom" required>
+
+  <label>Type:</label>
+  <input type="text" [(ngModel)]="nouveauProduit.type" name="type" required>
+
+  <label>Stock:</label>
+  <input type="number" [(ngModel)]="nouveauProduit.stock" name="stock" required>
+
+  <label>Fournisseur:</label>
+  <input type="text" [(ngModel)]="nouveauProduit.fournisseur" name="fournisseur" required>
+
+  <button type="submit">
+    {{ modifierMode ? 'Enregistrer les modifications' : 'Ajouter le produit' }}
+  </button>
+
+  <button type="button" *ngIf="modifierMode" (click)="modifierMode = false">
+    Annuler
+  </button>
+</form>
+
+<!-- Tableau des produits -->
+<table>
+  <thead>
+    <tr>
+      <th>ID</th>
+      <th>Nom</th>
+      <th>Type</th>
+      <th>Stock</th>
+      <th>Fournisseur</th>
+      <th>Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let p of produits">
+      <td>{{ p.id }}</td>
+      <td>{{ p.nom }}</td>
+      <td>{{ p.type }}</td>
+      <td>{{ p.stock }}</td>
+      <td>{{ p.fournisseur }}</td>
+      <td>
+        <button (click)="modifierProduit(p)">Modifier</button>
+        <button (click)="supprimerProduit(p.id)">Supprimer</button>
+      </td>
+    </tr>
+  </tbody>
+</table>
