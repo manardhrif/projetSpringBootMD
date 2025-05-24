@@ -4,6 +4,8 @@ import jakarta.persistence.*;
 import lombok.*;
 import jakarta.persistence.Enumerated;
 import jakarta.persistence.EnumType;
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 
 import java.time.LocalDate;
 @Entity
@@ -22,6 +24,7 @@ public class Machine {
         @Column(nullable = false)
         private EtatMachine etat; // Exemple : "Disponible", "En maintenance", "Hors service"
 
+        @JsonProperty("derniere_maintenance")
         private LocalDate derniereMaintenance;
     }
 

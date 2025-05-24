@@ -60,8 +60,7 @@ public class MaintenanceServiceImpl implements MaintenanceService {
     public boolean isMachineEnMaintenance(Long machineId) {
         Machine machine = machineRepo.findById(machineId)
                 .orElseThrow(() -> new EntityNotFoundException("Machine introuvable"));
-        return maintenanceRepo.findByMachineAndDateFinIsNull()
-                .stream()
-                .anyMatch(m -> m.getMachine().getId().equals(machineId));
+        List<Maintenance> maintenances = maintenanceRepo.findByMachineAndDateFinIsNull(machine);
+        return !maintenances.isEmpty();
     }
 }

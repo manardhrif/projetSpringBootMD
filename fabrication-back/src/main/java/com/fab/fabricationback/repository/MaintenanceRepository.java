@@ -8,5 +8,6 @@ import java.util.List;
 
 public interface MaintenanceRepository extends JpaRepository<Maintenance, Long> {
     List<Maintenance> findByMachine(Machine machine);
-    List<Maintenance> findByMachineAndDateFinIsNull(); // maintenances en cours
+    List<Maintenance> findByMachineAndDateFinIsNull(Machine machine
+    ); // maintenances en cours
 }
